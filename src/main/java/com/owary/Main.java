@@ -1,11 +1,14 @@
 package com.owary;
 
 import java.io.IOException;
+import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        TextParser.parse("string.txt");
+        String filename = "text.txt";
+        List<WordPair> parsed = TextParser.parse(filename);
+        CsvWriter.writeToCSV(parsed);
     }
 
 }

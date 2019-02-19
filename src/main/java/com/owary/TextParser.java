@@ -15,7 +15,7 @@ public class TextParser {
         List<String> sentences = getSentences(clean);
         List<WordPair> relations = getRelations(sentences);
         relations.sort(WordPair::compareTo);
-        relations.stream().limit(25).forEach(e -> System.out.println(e.getText() + " -> " + e.getNext() + " => "+e.getPairOccurred()+" === "+e.getOccurred()));
+        relations.stream().limit(25).forEach(e -> System.out.println(e.getWord() + " -> " + e.getNext() + " => "+e.getPairOccurred()+" === "+e.getOccurred()));
         serialize(relations, filename);
         return relations;
     }
@@ -92,7 +92,7 @@ public class TextParser {
             }
         }
         for (WordPair word : wordsList) {
-            String text = word.getText();
+            String text = word.getWord().getText();
             Integer i = lookupForWords.get(text);
             word.wordOccurred(i);
         }
@@ -100,8 +100,8 @@ public class TextParser {
     }
 
     private static void addToList(List<WordPair> list, WordPair word, Map<WordPair, WordPair> lookupForPairs, Map<String, Integer> lookupForWords){
-        lookupForWords.computeIfPresent(word.getText(), (k, v) -> ++v);
-        lookupForWords.putIfAbsent(word.getText(), 1);
+        lookupForWords.computeIfPresent(word.getWord().getText(), (k, v) -> ++v);
+        lookupForWords.putIfAbsent(word.getWord().getText(), 1);
 
         boolean pairContained = lookupForPairs.containsKey(word);
         if (!pairContained) {

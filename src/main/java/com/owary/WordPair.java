@@ -5,14 +5,14 @@ import java.util.Objects;
 
 public class WordPair implements Comparable<WordPair>, Serializable {
 
-    private String text;
-    private String next;
+    private Word word;
+    private Word next;
     private int occurred = 1;
     private int pairOccurred = 1;
 
-    public WordPair(String text, String next) {
-        this.text = text;
-        this.next = next;
+    public WordPair(String word, String next) {
+        this.word = new Word(word);
+        this.next = new Word(next);
     }
 
     public void wordOccurred(int i){
@@ -23,11 +23,11 @@ public class WordPair implements Comparable<WordPair>, Serializable {
         pairOccurred++;
     }
 
-    public String getText() {
-        return text;
+    public Word getWord() {
+        return word;
     }
 
-    public String getNext() {
+    public Word getNext() {
         return next;
     }
 
@@ -48,18 +48,18 @@ public class WordPair implements Comparable<WordPair>, Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof WordPair)) return false;
-        WordPair word = (WordPair) o;
-        return text.equals(word.text) &&
-                next.equals(word.next);
+        WordPair wordPair = (WordPair) o;
+        return Objects.equals(getWord(), wordPair.getWord()) &&
+                Objects.equals(getNext(), wordPair.getNext());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(text, next);
+        return Objects.hash(word, next);
     }
 
     @Override
     public String toString() {
-        return String.format("%s - %s - %d", text, next, pairOccurred);
+        return String.format("%s - %s - %d", word, next, pairOccurred);
     }
 }
