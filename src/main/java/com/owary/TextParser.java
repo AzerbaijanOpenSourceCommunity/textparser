@@ -20,12 +20,12 @@ public class TextParser {
         return relations;
     }
 
-    private static List<String> getSentences(String string){
+    public static List<String> getSentences(String string){
         String[] split = string.split("\\.");
         return Arrays.asList(split);
     }
 
-    private static String getString(String filename) throws IOException {
+    public static String getString(String filename) throws IOException {
         InputStream inputStream = TextParser.class.getClassLoader().getResourceAsStream(filename);
         if (inputStream==null) throw new NullPointerException("InputStream is null");
 //        final int bufferSize = 1024;
@@ -47,7 +47,7 @@ public class TextParser {
         return out.toString();
     }
 
-    private static String clean(String input){
+    public static String clean(String input){
         String string;
         string  = input.toLowerCase();
         string  = string.replace(",", "");
@@ -66,7 +66,7 @@ public class TextParser {
         return string;
     }
 
-    private static List<String> getWords(String input){
+    public static List<String> getWords(String input){
         String sentence = input.replaceAll("^[a-zA-ZəğüöƏĞÖÜıIİ]", "");
         String[] split = sentence.split("\\s+");
         List<String> words = Arrays.asList(split);

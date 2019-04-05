@@ -37,4 +37,23 @@ public class CsvWriter {
         }
     }
 
+    public static void writeToFile(List<String> sentences){
+        try (PrintWriter writer = new PrintWriter(new File("src/main/resources/sent_"+System.currentTimeMillis()+".txt"))) {
+
+            StringBuilder sb = new StringBuilder();
+
+            for (String sentence : sentences) {
+                sb.append(sentence.trim());
+                sb.append("\n");
+            }
+
+            writer.write(sb.toString());
+
+            System.out.println("done!");
+
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 }
